@@ -3,10 +3,9 @@ import Header from './components/Header.tsx';
 import Slider from './components/Slider.tsx';
 import Started from './components/Started.tsx';
 import { respond , say } from './components/func/bot_response.tsx';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function Page () {
-    let message_log:JSX.Element[] = [];
     const [use_log, set_log] = useState([respond("Hello, welcome to Solargain! How can I help you today?")]);
 
     function open_bot () {
@@ -25,10 +24,13 @@ function Page () {
     }
 
     async function send_to_bot () {
-        const prompt:any = document.querySelector('#chat-type')?.value;
+        const prompter:any = document.querySelector('#chat-type');
+        const prompt = prompter.value;
         console.log(prompt);
 
-        document.querySelector('#chat-send').disabled = true;
+        const chat_send:any = document.querySelector('#chat-send');
+        chat_send.disabled = true;
+
         document.querySelector('#chat-thinking')?.classList.add('thinking-active');
 
         const request = await fetch("http://58.164.13.181:3000", {method:"POST", mode:"cors", body:prompt});
@@ -36,14 +38,14 @@ function Page () {
 
         set_log([...use_log, say(prompt), respond(res)]);
 
-        document.querySelector('#chat-send').disabled = false;
+        chat_send.disabled = false;
         document.querySelector('#chat-thinking')?.classList.remove('thinking-active');
     };
 
     document.addEventListener("keypress", (event) => {
         console.log(event.key)
     });
-    
+
     return (
         <>
             <Header />
