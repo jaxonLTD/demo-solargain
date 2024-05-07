@@ -33,7 +33,7 @@ function Page () {
 
         document.querySelector('#chat-thinking')?.classList.add('thinking-active');
 
-        const request = await fetch("https://58.164.13.181:3000", {method:"POST", mode:"cors", body:prompt});
+        const request = await fetch("https://solargain-bot.vercel.app/", {method:"POST", mode:"cors", body:prompt});
         const res = await request.text();
 
         set_log([...use_log, say(prompt), respond(res)]);
@@ -42,10 +42,6 @@ function Page () {
         document.querySelector('#chat-thinking')?.classList.remove('thinking-active');
         prompter.value = '';
     };
-
-    document.addEventListener("keypress", (event) => {
-        console.log(event.key)
-    });
 
     return (
         <>
