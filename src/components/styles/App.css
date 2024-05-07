@@ -27,6 +27,7 @@
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
+    z-index: 999;
 }
 
 #chat-header {
